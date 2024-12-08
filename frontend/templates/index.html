@@ -3,34 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prosta Aplikacja Flask</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Witaj na stronie</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJ8v+L4hPpAAAs6v3g+z9j2n9C/6TTQ6tn80lxNJwEY4YOtCgYw9GhFtxJb8" crossorigin="anonymous">
 </head>
 <body>
     <header>
-        <h1>XSS Playground</h1>
-        <p>Eksperymentalna aplikacja do testowania i nauki różnych typów ataków XSS.</p>
+        <h1 class="text-center my-4">Witaj na naszej aplikacji</h1>
+        <p class="text-center">Stworzone by Tymoteusz Mróz, Michał Lekstan i Szymon Wątroba</p>
     </header>
-<div class="sections">
-    <div class="section">
-        <h2>Reflected XSS</h2>
-        <p>Odbity atak XSS.</p>
-        <button onclick="location.href='{{ url_for('reflected_xss') }}'">Przejdź do zadania</button>
+    <div class="container d-flex justify-content-center gap-3">
+        <!-- Formularz Rejestracji -->
+        <div class="card p-4">
+            <h3 class="text-center mb-4">Rejestracja</h3>
+            <form action="/submit_registration" method="post">
+                <div class="mb-3">
+                    <label for="reg-username" class="form-label">Nazwa użytkownika</label>
+                    <input type="text" class="form-control" id="reg-username" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="reg-email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="reg-email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="reg-password" class="form-label">Hasło</label>
+                    <input type="password" class="form-control" id="reg-password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Zarejestruj się</button>
+            </form>
+        </div>
+    
+        <!-- Formularz Logowania -->
+        <div class="card p-4">
+            <h3 class="text-center mb-4">Logowanie</h3>
+            <form action="/submit_login" method="post">
+                <div class="mb-3">
+                    <label for="login-username" class="form-label">Nazwa użytkownika</label>
+                    <input type="text" class="form-control" id="login-username" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="login-password" class="form-label">Hasło</label>
+                    <input type="password" class="form-control" id="login-password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Zaloguj się</button>
+            </form>
+        </div>
     </div>
 
-    <!-- Sekcja dla Stored XSS -->
-    <div class="section">
-        <h2>Stored XSS</h2>
-        <p>Trwały atak XSS.</p>
-        <button onclick="location.href='{{ url_for('stored_xss') }}'">Przejdź do zadania</button>
-    </div>
-
-    <!-- Sekcja dla DOM-based XSS -->
-    <div class="section">
-        <h2>DOM-based XSS</h2>
-        <p>Atak XSS bazujący na DOM.</p>
-        <button onclick="location.href='{{ url_for('dom_xss') }}'">Przejdź do zadania</button>
-    </div>
-</div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gyb7erQnDk9FvUv9X3RXrGioB6bHDt9DoWs4z8r5dXr+Z3fVu9J" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0gRVlzI4zB8Kk9zz0lZCk2HLz+YjpJ6qfFJc0eea2psRyy5v" crossorigin="anonymous"></script>
 </body>
 </html>

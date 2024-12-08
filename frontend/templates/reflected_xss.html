@@ -7,6 +7,16 @@
 </head>
 <body>
     <h1>Reflected XSS</h1>
-    <a href="/">Powrót do strony głównej</a>
+    <form method="POST">
+        <label for="user_input">Wprowadź coś:</label>
+        <input type="text" id="user_input" name="user_input">
+        <input type="submit" value="Wyślij">
+    </form>
+    {% if user_input %}
+    
+        <h2>Wprowadzone dane:</h2>
+        <p>{{ user_input }}</p>
+    {% endif %}
+    <a href="/tasks">Powrót do strony głównej</a>
 </body>
 </html>
