@@ -7,8 +7,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <header>
-        <h1>XSS Playground</h1>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <h1>XSS Playground</h1>
+        </div>
+        <div class="navbar-right">
+            <span>Witaj, Tymek</span>
+        </div>
+    </nav>
+    <header class="header-intro">
         <p>Eksperymentalna aplikacja do testowania i nauki różnych typów ataków XSS.</p>
     </header>
 <div class="sections">
