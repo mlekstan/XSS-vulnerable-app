@@ -3,10 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOM-based XSS</title>
+    <title>DOM based XSS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stored.css') }}">
 </head>
 <body>
-    <h1>DOM-based XSS</h1>
+    <h1>DOM based XSS</h1>
+    <div class="container">
+        <div class="text-section">
+            <h2>Instrukcja</h2>
+        </div>
+        <div class="dom_based-section">
+            <h2>Zdjęcie</h2>
+            <div id="user-photo" style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                <div>
+                    <input type="file" id="file-input" accept="image/*">
+                </div>
+            </div>
+            
+        </div>
+    </div>
     <a href="/tasks">Powrót do strony głównej</a>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const photoFromUrl = params.get("photo");
+
+        if (photoFromUrl) {
+            document.getElementById('user-photo').innerHTML = `${photoFromUrl}<button id='remove-photo-button'>Usuń zdjęcie</button>`;
+
+            const baseUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, baseUrl);
+
+            document.getElementById('remove-photo-button').addEventListener('click', function() {
+                document.getElementById('user-photo').innerHTML = '<input type="file" id="file-input" accept="image/*">';
+                addFileInputListener();
+            });
+        }
+
+        function addFileInputListener() {
+            document.getElementById('file-input').addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('user-photo').innerHTML = `<img src="${e.target.result}" alt="Zdjęcie użytkownika"><button id='remove-photo-button'>Usuń zdjęcie</button>`;
+                        document.getElementById('remove-photo-button').addEventListener('click', function() {
+                            document.getElementById('user-photo').innerHTML = '<input type="file" id="file-input" accept="image/*">';
+                            addFileInputListener();
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        addFileInputListener();
+    </script>
 </body>
 </html>

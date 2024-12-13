@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, send_from_directory
 
 app = Flask(__name__, template_folder='../frontend/templates', static_folder='../frontend/static')
 
@@ -22,6 +22,18 @@ def stored_xss():
 @app.route('/dom_xss')
 def dom_xss():
     return render_template('dom_xss.html')
+
+
+@app.route('/track-image', methods=['GET'])
+def track_image():
+
+    user_ip = request.remote_addr
+    print(f"Przechwycony adres IP: {user_ip}")
+
+
+    # Wysyłanie odpowiedzi z obrazem
+    return send_from_directory('../frontend/static/images', 'kotek_szary.jpg')
+
 
 
 if __name__ == '__main__':

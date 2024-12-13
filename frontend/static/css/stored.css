@@ -47,7 +47,7 @@ h2 {
 }
 
 .text-section,
-.comments-section {
+.comments-section, .dom_based-section {
     flex: 1;
     border-right: 1px solid #ccc;
     display: flex;
@@ -206,4 +206,22 @@ form button:hover {
     color: red;
     text-decoration: none;
     cursor: pointer;
+}
+
+#remove-photo-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px; /* Dodano, aby przycisk znajdował się pod zdjęciem */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+    display: block; /* Upewniono się, że przycisk zajmuje całą szerokość */
+    text-align: center; /* Wyśrodkowano tekst na przycisku */
+}
+
+#remove-photo-button:hover {
+    background-color: #c0392b;
 }
