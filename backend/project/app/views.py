@@ -1,25 +1,30 @@
-from django.shortcuts import render
-from .forms import SignInForm, SignUpForm
+from django.shortcuts import render, redirect
+from .forms import MyUserCreationForm, CreateCommmentForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 def index(request):
     if request.method == "POST":
-        sign_up_form = SignUpForm(request.POST)
-
+        sign_up_form = MyUserCreationForm(request.POST)
         if sign_up_form.is_valid():
-            user_name = sign_up_form.cleaned_data["user_name"]
-            email = sign_up_form.cleaned_data["email"]
-            pasword = sign_up_form.cleaned_data["password"]
-
-            return HttpResponseRedirect(reverse("app:tasks"))
-
+            sign_up_form.save()
+            return redirect("app:tasks")
 
     else:
-        sign_up_form = SignUpForm()
-        
-        return render(request, "app/index.html", {"sign_up_form": sign_up_form})
+        sign_up_form = MyUserCreationForm()
+    
+    context = {"sign_up_form": sign_up_form}
+    return render(request, "app/index.html", context)
     
 
 def tasks(request):
-    render(request, "app/tasks.html")
+    return render(request, "app/tasks.html")
+
+def reflected_xss(request):
+    pass
+
+def stored_xss(request):
+    pass
+
+def dom_xss(request):
+    pass

@@ -1,10 +1,12 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prosta Aplikacja Flask</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{% static 'app/style.css' %}"> 
 </head>
 <body>
     <nav class="navbar">
@@ -22,21 +24,21 @@
     <div class="section">
         <h2>Reflected XSS</h2>
         <p>Odbity atak XSS.</p>
-        <button onclick="location.href='{{ url_for('reflected_xss') }}'">Przejdź do zadania</button>
+        <button onclick="location.href='{% url 'app:reflected_xss' %}'">Przejdź do zadania</button>
     </div>
 
     <!-- Sekcja dla Stored XSS -->
     <div class="section">
         <h2>Stored XSS</h2>
         <p>Trwały atak XSS.</p>
-        <button onclick="location.href='{{ url_for('stored_xss') }}'">Przejdź do zadania</button>
+        <button onclick="location.href='{% url 'app:stored_xss' %}'">Przejdź do zadania</button>
     </div>
 
     <!-- Sekcja dla DOM-based XSS -->
     <div class="section">
         <h2>DOM-based XSS</h2>
         <p>Atak XSS bazujący na DOM.</p>
-        <button onclick="location.href='{{ url_for('dom_xss') }}'">Przejdź do zadania</button>
+        <button onclick="location.href='{% url 'app:dom_xss' %}'">Przejdź do zadania</button>
     </div>
 </div>
 </body>
