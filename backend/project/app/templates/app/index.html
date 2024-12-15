@@ -6,14 +6,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Witaj na stronie</title>
+    <title>XSS vulnerable app</title>
     <link rel="stylesheet" href="{% static 'app/index.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJ8v+L4hPpAAAs6v3g+z9j2n9C/6TTQ6tn80lxNJwEY4YOtCgYw9GhFtxJb8" crossorigin="anonymous">
 </head>
 <body>
     <header>
         <h1 class="text-center my-4">XSS vulnerable app</h1>
-        <p class="text-center">Created by Tymoteusz Mróz, Michał Lekstan i Szymon Wątroba</p>
+        <p class="text-center">Created by Tymoteusz Mróz, Michał Lekstan and Szymon Wątroba</p>
     </header>
     <div class="container d-flex justify-content-center gap-3">
         <!-- Formularz Rejestracji -->
@@ -33,23 +33,24 @@
                     <label for="{{ sign_up_form.password.id_for_label }}" class="form-label">Password</label>
                     {{ sign_up_form.password }}
                 </div>
-                <button type="submit" class="btn btn-success w-100">Sign up</button>
+                <button type="submit" class="btn btn-success w-100" name="signup">Sign up</button>
             </form>
         </div>
     
         <!-- Formularz Logowania -->
         <div class="card p-4">
-            <h3 class="text-center mb-4">Loin</h3>
+            <h3 class="text-center mb-4">Login</h3>
             <form action="{% url 'app:index' %}" method="post">
+                {% csrf_token %}
                 <div class="mb-3">
-                    <label for="login-username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="login-username" name="username" required>
+                    <label for="{{ sign_in_form.username.id_for_label }}" class="form-label">Username</label>
+                    {{ sign_in_form.username }}
                 </div>
                 <div class="mb-3">
-                    <label for="login-password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="login-password" name="password" required>
+                    <label for="{{ sign_in_form.password.id_for_label }}" class="form-label">Password</label>
+                    {{ sign_in_form.password }}
                 </div>
-                <button id="SubmitButton" type="submit" class="btn btn-primary w-100">Sign in</button>
+                <button type="submit" class="btn btn-primary w-100" name="signin">Sign in</button>
             </form>
         </div>
     </div>

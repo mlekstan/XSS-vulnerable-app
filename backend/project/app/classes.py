@@ -1,5 +1,3 @@
-import logging
-
 from django import forms
 from django.contrib.auth import get_user_model, password_validation
 from django.contrib.auth.models import User
@@ -8,25 +6,15 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.forms import SetPasswordMixin
 from django.contrib.auth.forms import UsernameField
 
-UserModel = get_user_model()
-logger = logging.getLogger("django.contrib.auth")
 
 class MySetPasswordMixin(SetPasswordMixin):
-    """
-    Form mixin that validates and sets a password for a user.
-    """
-
-    error_messages = {
-        "password_mismatch": _("The two password fields didn’t match."),
-    }
 
     @staticmethod
-    def create_password_field(label=_("Password")):
+    def create_password_field():
         password = forms.CharField(
-            label=label,
-            required=False,
+            required=True,
             strip=False,
-            widget=forms.PasswordInput(attrs={"autocomplete": "new-password"}),
+            widget=forms.PasswordInput(),
             help_text=password_validation.password_validators_help_text_html(),
         )
         
@@ -66,11 +54,17 @@ class MyBaseUserCreationForm(MySetPasswordMixin, forms.ModelForm):
     """
 
     password = MySetPasswordMixin.create_password_field()
+    email = forms.EmailField(required=True)
 
     class Meta:
         model = User
-        fields = ("username",)
+        fields = ("username", "email" , "password")
         field_classes = {"username": UsernameField}
+        widgets = {
+            "username": forms.TextInput(attrs={"class": "form-control", "id": "reg-username", "name": "username"}),
+            "email": forms.EmailInput(attrs={"class": "form-control", "id": "reg-email", "name": "email"}),
+            "password": forms.PasswordInput(attrs={"class": "form-control", "id": "reg-password", "name": "password"}),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
