@@ -39,9 +39,9 @@ python backend\project\manage.py runserver
 ```
 
 ## 3. Korzystanie z aplikacji
+### Ważne:
 **Aby zacząć korzystać z głównych funkcji aplikacji należy utworzyć konto (podać "Username", "E-mail", "Password" i zatwierdzić przyciskiem "Sign up"). Hasło nie może być słabe oraz podobne do nazwy użytkownika. W przypadku gdy hasło będzie zbyt słabe konto użytkownika nie zostanie utworzone - nadal będzie wyświetlane okno rejestracji i logowania użytkownika. Po wprowadzeniu odpowiednio mocnego hasła nastąpi przekierowanie na stronę (XSS Playground) z możliwością wyboru zadania do wykonania. Z aplikacji można się wylogować za pomocą przycisku "Log out" umieszczonego w prawym górnym rogu okna. Aby podjąć próbę wykonania interesującego nas zadania należy kliknąć przycisk "Go to task" pod tytułem odpowiedniego zadania. Nastapi wtedy otworzenie strony wybranego zadania, na której będą opisane szczegóły dotyczące jego wykonania.**
-
-
+### Adresy URL:
 **a) Okno rejestracji i logowania użytkownika do aplikacji:**
 ```bash
 http://localhost:8000/app/
