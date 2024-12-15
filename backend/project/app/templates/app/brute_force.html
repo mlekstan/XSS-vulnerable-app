@@ -7,14 +7,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brute Force</title>
     <link rel="stylesheet" href="{% static 'app/stored.css' %}">
+    <style>
+
+p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #34495e;
+}
+
+ul {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #2c3e50;
+    padding-left: 1rem;
+    margin-bottom: 0.1rem;
+}
+
+ul li {
+    margin-bottom: 0.2rem;
+}
+
+.password-list a {
+    margin: 0.2rem 0;
+    text-decoration: none;
+    color:#000000;
+}
+
+    </style>
 </head>
 <body>
     <h1>Brute Force Attack</h1>
     <div class="container">
         <div class="text-section">
             <h2>Instrukcja</h2>
+            <p>
+                Celem tego zadania jest stworzenie własnego skryptu w Pythonie, który symuluje atak brute-force na formularz logowania.
+            </p>
+            <p>
+                Atak brute-force polega na próbowaniu wielu różnych kombinacji haseł, aby uzyskać dostęp do konta użytkownika. W tym zadaniu celem jest napisanie skryptu, który automatycznie przetestuje listę 100 najpopularniejszych haseł w celu zalogowania się do aplikacji.
+            </p>
+            <ul>
+                <li>Nazwa użytkownika: <strong>"zgadnijmnie"</strong></li>
+                <li>Zapytania przy logowaniu wysyłane zostają na adres: <code>http://127.0.0.1:8000/app/</code></li>
+                <li>Przy poprawnej próbie logowania użytkownik zostaje przeniesiony na adres: <code>http://127.0.0.1:8000/app/tasks/</code></li>
+                <li>Nie zapomnij o tokenie CSRF.</li>
+            </ul>
+            <div class="password-list">
+                <p>
+                    Lista top 100 haseł z
+                    <a href="https://parade.com/living/most-common-passwords" target="_blank">https://parade.com/living/most-common-passwords</a>:
+                </p>
+            <pre style="overflow-x:visible">
+                <code>
+                    passwords = ['password', '123456', '123456789', 'guest', 'qwerty', '12345678', '111111', '12345', 'col123456', '123123', '1234567', '1234', '1234567890', '000000', '555555', '666666', '123321', '654321', '7777777', '123', 'D1lakiss', '777777', '110110jp', '1111', '987654321', '121212', 'Gizli', 'abc123', '112233', 'azerty', '159753', '1q2w3e4r', '54321', 'pass@123', '222222', 'qwertyuiop', 'qwerty123', 'qazwsx', 'vip', 'asdasd', '123qwe', '123654', 'iloveyou', 'a1b2c3', '999999', 'Groupd2013', '1q2w3e', 'usr', 'Liman1000', '1111111', '333333', '123123123', '9136668099', '11111111', '1qaz2wsx', 'password1', 'mar20lt', '987654321', 'gfhjkm', '159357', 'abcd1234', '131313', '789456', 'luzit2000', 'aaaaaa', 'zxcvbnm', 'asdfghjkl', '1234qwer', '88888888', 'dragon', '987654', '888888', 'qwe123', 'football', '3601', 'asdfgh', 'master', 'samsung', '12345678910', 'killer', '1237895', '1234561', '12344321', 'daniel', '000000', '444444', '101010', 'qazwsxedc', '789456123', 'super123', 'qwer1234', '123456789a', '823477aA', '147258369', 'unknown', '98765', 'q1w2e3r4', '232323', '102030', '12341234']
+                </code>
+            </pre>
+        </div>
+
+            <div class="hint-section">
+                <button class="hint-button" data-hint="1">Pokaż podpowiedź 1</button>
+                <button class="hint-button" data-hint="2">Pokaż podpowiedź 2</button>
+                <button class="hint-button" data-hint="3">Pokaż podpowiedź 3</button>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal-->
+    <div id="modal-hint" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Podpowiedź</h2>
+            <p id="modal-hint-text"></p>
         </div>
     </div>
     <a href="/app/tasks">Powrót do strony głównej</a>
+    <script src="{% static 'app/script.js' %}"></script>
 </body>
 </html>

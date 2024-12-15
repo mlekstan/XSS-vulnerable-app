@@ -17,7 +17,13 @@ h1 {
 }
 
 h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
+}
+
+a {
+    margin: 0.2rem 0;
+    text-decoration: none;
+    color:#e2d9d9;
 }
 
 .container {
@@ -122,12 +128,6 @@ h2 {
     margin-top: 5px;
 }
 
-a {
-    margin: 10px 0;
-    text-decoration: none;
-    color:#ecf0f1;
-}
-
 .modal {
     display: none;
     position: fixed;
@@ -213,15 +213,149 @@ form button:hover {
     color: white;
     border: none;
     padding: 10px 20px;
-    margin-top: 10px; /* Dodano, aby przycisk znajdował się pod zdjęciem */
+    margin-top: 10px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
     transition: background-color 0.2s ease;
-    display: block; /* Upewniono się, że przycisk zajmuje całą szerokość */
-    text-align: center; /* Wyśrodkowano tekst na przycisku */
+    display: block;
+    text-align: center;
 }
 
 #remove-photo-button:hover {
     background-color: #c0392b;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-hint {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content p {
+    margin: 20px 0;
+    font-size: 1.2rem;
+    color: #34495e;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 1.5rem;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close-button:hover {
+    color: #e74c3c;
+}
+
+.password-list {
+    width: 100%;
+    max-width: 800px;
+    margin: 1rem auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+pre {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: monospace;
+    font-size: 1.2rem;
+    max-height: 25vh;
+    white-space: pre-wrap;
+}
+
+code {
+    color: #e74c3c;
+    font-family: monospace;
+    font-size: 1rem;
+}
+
+#copy-code-1, #copy-code-2 {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+    transition: background-color 0.2s ease;
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#copy-code:hover {
+    background-color: #2980b9;
+}
+
+.hint-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    margin-top: 0.5rem;
+}
+
+.hint-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.hint-button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+.hint-button:active {
+    background-color: #1a74b8;
+    transform: scale(0.95);
+}
+
+.hint-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.5);
+}
+
+@media (max-width: 768px) {
+    .hint-section {
+        flex-direction: column;
+        gap: 2rem;
+        margin-top: 5rem;
+    }
+
+    .hint-button {
+        width: 80%;
+        font-size: 1.5rem;
+        padding: 10px;
+    }
 }
