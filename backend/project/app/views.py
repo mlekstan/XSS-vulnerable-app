@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
-from .forms import MyAuthenticationForm
+from .forms import MyAuthenticationForm, CommmentForm
+from .models import Comments
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from .classes import MyBaseUserCreationForm
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
+from django.http import Http404
 
 def index(request):
 
@@ -56,8 +60,44 @@ def logout_view(request):
 def reflected_xss(request):
     pass
 
+@login_required
 def stored_xss(request):
-    return render(request, "app/stored_xss.html")
+    if request.method == "GET":
+        comment_form = CommmentForm()
+        comments = Comments.objects.select_related("author")
+
+        context = {
+            "comment_form": comment_form, 
+            "comments": comments,
+            "logged_user": request.user,
+        }
+        
+        return render(request, "app/stored_xss.html", context)
+    
+    else:
+        raise Http404("You can not access this page via GET.")
+
+@login_required
+def add_comment(request):
+    if request.method == "POST":
+        comment_form = CommmentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.author = request.user
+            comment.save()
+            return redirect("app:stored_xss")
+    else:
+        return redirect("app:stored:xss")
+        
+@login_required
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comments, id=comment_id)
+    
+    if request.method == "POST" and request.user.id == comment.author.id:
+        comment.delete()
+        return redirect("app:stored_xss")
+    else:
+        return redirect("app:stored_xss")
 
 def dom_xss(request):
     pass

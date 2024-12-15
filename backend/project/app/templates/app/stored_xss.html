@@ -1,3 +1,4 @@
+
 {% load static  %}
 
 <!DOCTYPE html>
@@ -12,7 +13,7 @@
     <h1>Stored XSS</h1>
     <div class="container">
         <div class="text-section">
-            <h2>Instrukcja</h2>
+            <h2>Instruction</h2>
             <p>Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
                 Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
                 Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
@@ -39,61 +40,48 @@
                 Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!</p>
         </div>
         <div class="comments-section">
-            <h2>Komentarze</h2>
-            <button class="add" onclick="openModal()">Dodaj komentarz</button>
-            <div class="comment">
-                <div class="comment-header">
-                    <div class="author">Autor: Jan Kowalski</div>
-                    <button class="delete-button" onclick="this.parentElement.parentElement.remove();">Usuń</button>
+            <h2>Comments</h2>
+            <button class="add" onclick="openModal()">Add comment</button>
+            
+            {% for comment in comments %}
+                
+                <div class="comment">
+                    <div class="comment-header">
+                        <div class="author">Author: {{comment.author.username}}</div>
+                        
+                        {% if comment.author.id == logged_user.id %}
+                        
+                            <form action="{% url 'app:delete_comment' comment.id %}" method="post" style="display: inline-block;">
+                                {% csrf_token %}
+                                <button type="submit" class="delete-button">Delete</button>
+                            </form>
+                        
+                        {% endif %}
+                    
+                    </div>
+                    {% autoescape off %}
+                    <div class="text">{{ comment.content }}</div>
+                    {% endautoescape %}
                 </div>
-                <div class="text">Przykładowy komentarz 1 Przykładowy komentarz 1 Przykładowy komentarz 1 Przykładowy komentarz 1 Przykładowy komentarz 1
-                    Przykładowy komentarz 1 Przykładowy komentarz 1 Przykładowy komentarz 1 Przykładowy komentarz 1 Przykładowy komentarz 1 Przykładowy komentarz 1
-                    Przykładowy komentarz 1 Przykładowy komentarz 1 Przykładowy komentarz 1
-                </div>
-            </div>
-            <div class="comment">
-                <div class="comment-header">
-                    <div class="author">Autor: Jan Kowalski</div>
-                    <button class="delete-button" onclick="this.parentElement.parentElement.remove();">Usuń</button>
-                </div>
-                <div class="text">Przykładowy komentarz 1</div>
-            </div>
-            <div class="comment">
-                <div class="comment-header">
-                    <div class="author">Autor: Jan Kowalski</div>
-                    <button class="delete-button" onclick="this.parentElement.parentElement.remove();">Usuń</button>
-                </div>
-                <div class="text">Przykładowy komentarz 1</div>
-            </div>
-            <div class="comment">
-                <div class="comment-header">
-                    <div class="author">Autor: Jan Kowalski</div>
-                    <button class="delete-button" onclick="this.parentElement.parentElement.remove();">Usuń</button>
-                </div>
-                <div class="text">Przykładowy komentarz 1</div>
-            </div>
-            <div class="comment">
-                <div class="comment-header">
-                    <div class="author">Autor: Jan Kowalski</div>
-                    <button class="delete-button" onclick="this.parentElement.parentElement.remove();">Usuń</button>
-                </div>
-                <div class="text">Przykładowy komentarz 1</div>
-            </div>
+
+            {% endfor %}
+            
         </div>
     </div>
-    <a href="/tasks">Powrót do strony głównej</a>
+    <a href="{% url 'app:tasks' %}">Return to main page</a>
 
     <!--Modal-->
     <div id="modal" class="modal" onclick="closeModalOnOutsideClick(event)">
         <div class="modal-content">
             <span class="close-button" onclick="closeModal()">&times;</span>
-            <h2>Dodaj komentarz</h2>
-            <form id="addCommentForm" onsubmit="addComment(event)">
-                <textarea id="commentText" name="commentText" required placeholder="Napisz komentarz"></textarea>
-                <button type="submit">Dodaj</button>
+            <h2>Add comment</h2>
+            <form id="addCommentForm" action="{% url 'app:add_comment' %}" method="post">
+                {% csrf_token %}
+                {{ comment_form.content }}
+                <button type="submit">Add</button>
             </form>
         </div>
     </div>
-    <!--<script src="{% static 'app/script.js' %}"></script> -->
+    <script src="{% static 'app/script.js' %}"></script>
 </body>
 </html>

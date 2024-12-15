@@ -94,7 +94,7 @@ h2 {
 .comment-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items:end;
     margin-bottom: 10px;
 }
 
