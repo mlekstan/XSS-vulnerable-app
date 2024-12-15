@@ -36,19 +36,18 @@ body {
     color: black;
 }
 
-.sections{
-    display: flex;
-    justify-content: space-between;
+.grid-container{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
     align-items: center;
     gap: 3rem;
-    padding: 30px;
+    padding:1.5rem;
     background-color: #2c3e50;
-    margin: 7rem auto;
-    width:80% ;
+    margin: 2rem auto;
+    width:80%;
 }
 
 .section {
-    flex: 1;
     padding: 20px;
     text-align: center;
     border: 1px solid #ccc;
@@ -57,6 +56,12 @@ body {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     animation: fadeIn 1.5s ease-in-out;
+}
+
+.section.brute-force {
+    grid-column: 1 / span 3;
+    justify-self: center;
+    width: 28%;
 }
 
 @keyframes fadeIn {
@@ -115,13 +120,20 @@ transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 @media (max-width: 768px) {
-    .sections {
-        flex-direction: column;
-        align-items: stretch;
+    .grid-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        width: 90%;
     }
 
     .section {
         max-width: 100%;
+        padding: 15px;
+    }
+
+    .section.brute-force {
+        width: 95%;
+        grid-column: 1;
     }
 
     header {

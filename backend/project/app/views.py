@@ -118,3 +118,6 @@ def stored_xss(request):
 
 def dom_xss(request):
     pass
+
+def brute_force(request):
+    return render(request, "app/brute_force.html")
