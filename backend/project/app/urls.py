@@ -12,5 +12,5 @@ urlpatterns = [
     path("tasks/stored_xss/add_comment", views.add_comment, name="add_comment"),
     path("tasks/stored_xss/delete_comment/<int:comment_id>/", views.delete_comment, name="delete_comment"),
     path("brute_force/", views.brute_force, name="brute_force"),
-    path('attack/', views.attack, name='attack'),  # Dodajemy ścieżkę /attack/
+#    path('attack/', views.attack, name='attack'),  # Dodajemy ścieżkę /attack/
 ]

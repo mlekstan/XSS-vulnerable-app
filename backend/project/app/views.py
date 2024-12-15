@@ -51,7 +51,7 @@ def brute_force(request):
     return redirect("app:index")
 
 
-def attack(request):
+def reflected_xss(request):
     """
     Widok obsługujący stronę /app/attack.
     Umożliwia wprowadzenie komunikatu i jego wyświetlenie.
@@ -61,7 +61,7 @@ def attack(request):
     if request.method == "GET" and 'msg' in request.GET:
         message = request.GET['msg']  # Pobieramy komunikat z parametrów URL
     
-    return render(request, 'app/attack.html', {'message': message})
+    return render(request, 'app/reflected_xss.html', {'message': message})
 
 
 def index(request):
@@ -113,8 +113,7 @@ def logout_view(request):
     return redirect("app:index")
 
 
-def reflected_xss(request):
-    pass
+
 
 @login_required
 def stored_xss(request):
@@ -156,7 +155,9 @@ def delete_comment(request, comment_id):
         return redirect("app:stored_xss")
 
 def dom_xss(request):
-    pass
+    return render(request, "app/dom_xss.html")
+
+
 
 def brute_force(request):
     return render(request, "app/brute_force.html")

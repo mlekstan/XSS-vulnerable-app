@@ -1,22 +1,27 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reflected XSS</title>
+    <title>Attack Simulation</title>
 </head>
 <body>
-    <h1>Reflected XSS</h1>
-    <form method="POST">
-        <label for="user_input">Wprowadź coś:</label>
-        <input type="text" id="user_input" name="user_input">
-        <input type="submit" value="Wyślij">
+    <h1>Simulated XSS Attack Page</h1>
+
+    <form method="get" action="">
+        <label for="msg">Enter a message:</label><br>
+        <input type="text" id="msg" name="msg" placeholder="Type your message here">
+        <button type="submit">Submit</button>
     </form>
-    {% if user_input %}
-    
-        <h2>Wprowadzone dane:</h2>
-        <p>{{ user_input }}</p>
+
+    <hr>
+
+    {% if message %}
+        <h2>Your message:</h2>
+        <!-- UWAGA: Ta linia poniżej renderuje dane użytkownika BEZ ucieczki -->
+        <div>{{ message|safe }}</div>
     {% endif %}
-    <a href="/tasks">Powrót do strony głównej</a>
+
+    <a href="/app/tasks">Powrót do strony głównej</a>
 </body>
 </html>
