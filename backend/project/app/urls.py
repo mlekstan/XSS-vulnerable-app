@@ -8,5 +8,8 @@ urlpatterns = [
     path("tasks/", views.tasks, name="tasks"),
     path("tasks/reflected_xss/", views.reflected_xss, name="reflected_xss"),
     path("tasks/stored_xss", views.stored_xss, name="stored_xss"),
-    path("tasks/dom_xss/", views.dom_xss, name="dom_xss")
+    path("tasks/dom_xss/", views.dom_xss, name="dom_xss"),
+    path("brute_force/", views.brute_force, name="brute_force"),
+    path('attack/', views.attack, name='attack'),  # Dodajemy ścieżkę /attack/
+
 ]
