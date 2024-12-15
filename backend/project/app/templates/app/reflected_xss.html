@@ -1,26 +1,126 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'app/stored.css' %}">
     <title>Attack Simulation</title>
+    
 </head>
+<style>
+    form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+}
+
+form label {
+    font-size: 1rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    width: 90%;
+}
+
+form input[type="text"],
+form button {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form input[type="text"] {
+    background-color: #ecf0f1;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+form input[type="text"]:focus {
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.5);
+}
+
+form button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+form button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+form button:active {
+    background-color: #1a74b8;
+    transform: scale(0.95);
+}
+
+.result {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #ecf0f1;
+    width: 90%;
+    text-align: center;
+    font-size: 1rem;
+    color: #2c3e50;
+    word-break: break-word;
+}
+</style>
 <body>
-    <h1>Simulated XSS Attack Page</h1>
+    
+    <h1>Reflected XSS</h1>
 
-    <form method="get" action="">
-        <label for="msg">Enter a message:</label><br>
-        <input type="text" id="msg" name="msg" placeholder="Type your message here">
-        <button type="submit">Submit</button>
-    </form>
+    <div class="container">
+        <!-- Sekcja Instrukcji -->
+        <div class="text-section">
+            <h2>Instrukcja</h2>
+                <p>
+                    Twoim zadaniem jest przetestowanie podstrony pod kątem podatności na atak <strong>Reflected XSS</strong>.
+                </p>
+                <ul>
+                    <li>Przeanalizuj, w jaki sposób parametry są przekazywane w adresie URL tej podstrony.</li>
+                    <li>Sprawdź, jak dane wprowadzone w parametrze wpływają na wyświetlaną treść strony.</li>
+                    <li>Oceń, czy można wprowadzić wartość, która zostanie zinterpretowana w sposób inny niż oczekiwano.</li>
+                    <li>Wykorzystaj swoją wiedzę, aby zbadać, czy istnieje możliwość wykonania kodu <strong>JavaScript</strong>.</li>
+                </ul>
+        </div>
 
-    <hr>
+        <!-- Sekcja Formularza -->
+        <div class="form-section">
+            <h2>Testowanie XSS</h2>
+            <form method="get" action="">
+                <label for="msg">Wprowadź wiadomość:</label><br>
+                <input type="text" id="msg" name="msg" placeholder="Wpisz swoją wiadomość tutaj">
+                <button type="submit">Wyślij</button>
+            </form>
 
-    {% if message %}
-        <h2>Your message:</h2>
-        <!-- UWAGA: Ta linia poniżej renderuje dane użytkownika BEZ ucieczki -->
-        <div>{{ message|safe }}</div>
-    {% endif %}
+            <!-- Wyświetlenie Wyniku -->
+            {% if message %}
+                <div class="result">
+                    <h3>Twoja wiadomość:</h3>
+                    <!-- UWAGA: Dane renderowane BEZ ucieczki -->
+                    <div>{{ message|safe }}</div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
 
     <a href="/app/tasks">Powrót do strony głównej</a>
 </body>
