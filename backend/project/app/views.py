@@ -57,7 +57,7 @@ def reflected_xss(request):
     pass
 
 def stored_xss(request):
-    pass
+    return render(request, "app/stored_xss.html")
 
 def dom_xss(request):
     pass

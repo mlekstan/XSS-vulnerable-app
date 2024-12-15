@@ -28,21 +28,24 @@
     <div class="section">
         <h2>Reflected XSS</h2>
         <p>Odbity atak XSS</p>
-        <button onclick="location.href='{% url 'app:reflected_xss' %}'">Przejdź do zadania</button>
+        <button onclick="location.href='{% url 'app:reflected_xss' %}'">Go to task</button>
     </div>
 
     <!-- Sekcja dla Stored XSS -->
     <div class="section">
         <h2>Stored XSS</h2>
         <p>Trwały atak XSS</p>
-        <button onclick="location.href='{% url 'app:stored_xss' %}'">Przejdź do zadania</button>
+        <form action="{% url 'app:stored_xss' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Go to task</button>
+        </form>
     </div>
 
     <!-- Sekcja dla DOM-based XSS -->
     <div class="section">
         <h2>DOM-based XSS</h2>
         <p>Atak XSS bazujący na DOM</p>
-        <button onclick="location.href='{% url 'app:dom_xss' %}'">Przejdź do zadania</button>
+        <button onclick="location.href='{% url 'app:dom_xss' %}'">Go to task</button>
     </div>
 </div>
 </body>
