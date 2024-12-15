@@ -1,10 +1,13 @@
+{% load static %}
+
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOM based XSS</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/stored.css') }}">
+    <link rel="stylesheet" href="{% static 'css/stored.css' %}">
 </head>
 <body>
     <h1>DOM based XSS</h1>
@@ -22,7 +25,7 @@
             
         </div>
     </div>
-    <a href="/tasks">Powrót do strony głównej</a>
+    <a href="/app/tasks">Powrót do strony głównej</a>
 
     <script>
         const params = new URLSearchParams(window.location.search);
