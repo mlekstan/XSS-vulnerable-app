@@ -26,6 +26,24 @@ a {
     color:#e2d9d9;
 }
 
+p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #34495e;
+}
+
+ul {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #2c3e50;
+    padding-left: 1rem;
+    margin-bottom: 0.1rem;
+}
+
+ul li {
+    margin-bottom: 0.2rem;
+}
+
 .container {
     display: flex;
     flex-direction: row;
@@ -53,7 +71,7 @@ a {
 }
 
 .text-section,
-.comments-section, .dom_based-section {
+.comments-section, .dom_based-section, .form-section {
     flex: 1;
     border-right: 1px solid #ccc;
     display: flex;
