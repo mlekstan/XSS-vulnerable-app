@@ -17,7 +17,7 @@
             <span>{{ username }}</span>
             <form action="{% url 'app:logout' %}" method="post">
                 {% csrf_token %}
-                <button type="submit" class="log-out-btn">Log out</button>
+                <button type="submit" class="log-out-btn">Wyloguj się</button>
             </form>
         </div>
     </nav>
@@ -29,7 +29,7 @@
     <div class="section">
         <h2>Reflected XSS</h2>
         <p>Odbity atak XSS</p>
-        <button onclick="location.href='{% url 'app:reflected_xss' %}'">Go to task</button>
+        <button onclick="location.href='{% url 'app:reflected_xss' %}'">Przejdź do zadania</button>
     </div>
 
     <!-- Sekcja dla Stored XSS -->
@@ -38,7 +38,7 @@
         <p>Trwały atak XSS</p>
         <form action="{% url 'app:stored_xss' %}" method="get">
             {% csrf_token %}
-            <button type="submit">Go to task</button>
+            <button type="submit">Przejdź do zadania</button>
         </form>
     </div>
 
@@ -46,7 +46,7 @@
     <div class="section">
         <h2>DOM-based XSS</h2>
         <p>Atak XSS bazujący na DOM</p>
-        <button onclick="location.href='{% url 'app:dom_xss' %}'">Go to task</button>
+        <button onclick="location.href='{% url 'app:dom_xss' %}'">Przejdź do zadania</button>
     </div>
 
     <!-- Sekcja dla Brute Force Attack -->
@@ -55,7 +55,7 @@
         <p>Atak siłowy</p>
         <form action="{% url 'app:brute_force' %}" method="post">
             {% csrf_token %}
-            <button type="submit">Go to task</button>
+            <button type="submit">Przejdź do zadania</button>
         </form>
     </div>
 

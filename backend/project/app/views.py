@@ -60,6 +60,7 @@ def index(request):
 
     return render(request, "app/index.html", context)
     
+
 @login_required
 def tasks(request):
     username = request.user.username
@@ -67,11 +68,10 @@ def tasks(request):
     context = {"username": username}
     return render(request, "app/tasks.html", context)
 
+
 def logout_view(request):
     logout(request)
     return redirect("app:index")
-
-
 
 
 @login_required
@@ -91,6 +91,7 @@ def stored_xss(request):
     else:
         raise Http404("You can not access this page via GET.")
 
+
 @login_required
 def add_comment(request):
     if request.method == "POST":
@@ -102,7 +103,8 @@ def add_comment(request):
             return redirect("app:stored_xss")
     else:
         return redirect("app:stored:xss")
-        
+
+
 @login_required
 def delete_comment(request, comment_id):
     comment = get_object_or_404(Comments, id=comment_id)
@@ -113,10 +115,12 @@ def delete_comment(request, comment_id):
     else:
         return redirect("app:stored_xss")
 
+
+@login_required
 def dom_xss(request):
     return render(request, "app/dom_xss.html")
 
 
-
+@login_required
 def brute_force(request):
     return render(request, "app/brute_force.html")

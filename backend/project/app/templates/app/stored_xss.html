@@ -13,41 +13,31 @@
     <h1>Stored XSS</h1>
     <div class="container">
         <div class="text-section">
-            <h2>Instruction</h2>
-            <p>Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!
-                Tutaj możesz przeczytać o Stored XSS i jego działaniu. Pamiętaj, aby zachować ostrożność podczas testowania i eksperymentowania z kodem!</p>
+            <h2>Instrukcja</h2>
+            <p> 
+                1. Stwórz komentarz, którego przynajmniej część treści będzie stanowił skrypt JavaScript np. &lt;script&gt;alert("JKM atak cyborga")&lt;/script&gt;.
+                Aby stworzyć komentarz należy kliknąć przycisk "Dodaj komentarz". Pojawi się okienko z polem tekstowym umożliwiającym wpisanie komentarza. 
+                Po wpisaniu treści (skryptu) należy zatwierdzić dodanie komentarza przyciskiem "Dodaj". 
+                Poprawnie utworzony komnetarz powinien pojawić się na liście komentarzy. <br><br>
+                2. Po utworzeniu komentarza trzeba się wylogować z konta użytkownika. 
+                W tym celu należy kliknąć link "Powrót do strony głównej", a następnie po przekierowaniu na stronę "XSS Playground" kliknąć przycisk "Wyloguj się" (prawy górny róg). 
+                Po poprawnym wylogowaniu powinno nastąpić przekierowanie na stronę rejestracji i logowania użytkownika. <br><br>
+                3. Należy stworzyć nowe konto lub zalogować się na konto istniejącego już użytkownika (innego niż ten, z którego konta utworzyliśmy komentarz ze skryptem). 
+                Następnie trzeba znowu wejść w sekcję "Stored XSS". 
+                Skrypt powinien wykonać się również dla tego (nowo zalogowanego) użytkownika. <br><br>
+                4. Jako potwierdzenie wykonania zadania należy przesłać zrzuty ekranu potwierdzające, że jeden (ten sam) skrypt wykonał się dla co najmniej dwóch różnych użytkowników. 
+                Można to zrobić uwzględniając w zrzucie ekranu również wartości ciasteczek: sessionid oraz username. 
+            </p>
         </div>
         <div class="comments-section">
-            <h2>Comments</h2>
-            <button class="add" onclick="openModal()">Add comment</button>
+            <h2>Komentarze</h2>
+            <button class="add" onclick="openModal()">Dodaj komentarz</button>
             
             {% for comment in comments %}
                 
                 <div class="comment">
                     <div class="comment-header">
-                        <div class="author">Author: {{comment.author.username}}</div>
+                        <div class="author">Autor: {{comment.author.username}}</div>
                         
                         {% if comment.author.id == logged_user.id %}
                         
@@ -68,17 +58,17 @@
             
         </div>
     </div>
-    <a href="{% url 'app:tasks' %}">Return to main page</a>
+    <a href="{% url 'app:tasks' %}">Powrót do strony głównej</a>
 
     <!--Modal-->
     <div id="modal" class="modal" onclick="closeModalOnOutsideClick(event)">
         <div class="modal-content">
             <span class="close-button" onclick="closeModal()">&times;</span>
-            <h2>Add comment</h2>
+            <h2>Dodaj komentarz</h2>
             <form id="addCommentForm" action="{% url 'app:add_comment' %}" method="post">
                 {% csrf_token %}
                 {{ comment_form.content }}
-                <button type="submit">Add</button>
+                <button type="submit">Dodaj</button>
             </form>
         </div>
     </div>
