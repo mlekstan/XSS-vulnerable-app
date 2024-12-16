@@ -8,6 +8,44 @@
     <title>XSS vulnerable app</title>
     <link rel="stylesheet" href="{% static 'app/style.css' %}">
 </head>
+<style>
+
+.navbar-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .navbar-right span {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .log-out-btn {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 0.8rem;
+    }
+
+    .log-out-btn:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+    }
+
+    .log-out-btn:active {
+        transform: scale(0.95);
+        background-color: #a93226;
+    }
+
+    .log-out-btn:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.5);
+    }
+
+</style>
 <body>
     <nav class="navbar">
         <div class="navbar-left">

@@ -14,20 +14,31 @@
     <div class="container">
         <div class="text-section">
             <h2>Instrukcja</h2>
-            <p> 
-                1. Stwórz komentarz, którego przynajmniej część treści będzie stanowił skrypt JavaScript np. &lt;script&gt;alert("JKM atak cyborga")&lt;/script&gt;.
-                Aby stworzyć komentarz należy kliknąć przycisk "Dodaj komentarz". Pojawi się okienko z polem tekstowym umożliwiającym wpisanie komentarza. 
-                Po wpisaniu treści (skryptu) należy zatwierdzić dodanie komentarza przyciskiem "Dodaj". 
-                Poprawnie utworzony komnetarz powinien pojawić się na liście komentarzy. <br><br>
-                2. Po utworzeniu komentarza trzeba się wylogować z konta użytkownika. 
-                W tym celu należy kliknąć link "Powrót do strony głównej", a następnie po przekierowaniu na stronę "XSS Playground" kliknąć przycisk "Wyloguj się" (prawy górny róg). 
-                Po poprawnym wylogowaniu powinno nastąpić przekierowanie na stronę rejestracji i logowania użytkownika. <br><br>
-                3. Należy stworzyć nowe konto lub zalogować się na konto istniejącego już użytkownika (innego niż ten, z którego konta utworzyliśmy komentarz ze skryptem). 
-                Następnie trzeba znowu wejść w sekcję "Stored XSS". 
-                Skrypt powinien wykonać się również dla tego (nowo zalogowanego) użytkownika. <br><br>
-                4. Jako potwierdzenie wykonania zadania należy przesłać zrzuty ekranu potwierdzające, że jeden (ten sam) skrypt wykonał się dla co najmniej dwóch różnych użytkowników. 
-                Można to zrobić uwzględniając w zrzucie ekranu również wartości ciasteczek: sessionid oraz username. 
+            <p>
+                Twoim celem jest przetestowanie podatności tej podstrony na atak <strong>Stored XSS</strong>.
             </p>
+            <ul>
+                <li>
+                    Stwórz komentarz, którego przynajmniej część treści będzie stanowił skrypt JavaScript np. <code>&lt;script&gt;alert("JKM atak cyborga")&lt;/script&gt;</code>..
+                </li>
+                <li>
+                    Aby dodać komentarz, kliknij przycisk <strong>„Dodaj komentarz”</strong>. Wprowadź swoją treść w formularzu,
+            a następnie kliknij <strong>„Dodaj”</strong>. Twój komentarz powinien pojawić się na liście.
+                </li>
+                <li>
+                    Po utworzeniu komentarza trzeba się wylogować z konta użytkownika.
+                    Wyloguj się z aktualnego konta użytkownika, klikając <strong>„Powrót do strony głównej”</strong>, a następnie <strong>„Wyloguj się”</strong>
+                    w prawym górnym rogu.
+                </li>
+                <li>
+                    Należy stworzyć nowe konto lub zalogować się na konto istniejącego już użytkownika (innego niż ten, z którego konta utworzyliśmy komentarz ze skryptem).
+                    Następnie trzeba znowu wejść w sekcję <strong>Stored XSS</strong>. Skrypt powinien wykonać się również dla tego (nowo zalogowanego) użytkownika.
+                </li>
+                <p>
+                    <strong>Jako potwierdzenie wykonania zadania należy przesłać zrzuty ekranu potwierdzające, że jeden (ten sam) skrypt wykonał się dla co najmniej dwóch różnych użytkowników. 
+                    Można to zrobić uwzględniając w zrzucie ekranu również wartości ciasteczek: sessionid oraz username.</strong>
+                </p>
+            </ul>
         </div>
         <div class="comments-section">
             <h2>Komentarze</h2>
@@ -43,7 +54,7 @@
                         
                             <form action="{% url 'app:delete_comment' comment.id %}" method="post" style="display: inline-block;">
                                 {% csrf_token %}
-                                <button type="submit" class="delete-button">Delete</button>
+                                <button type="submit" class="delete-button">Usuń</button>
                             </form>
                         
                         {% endif %}
