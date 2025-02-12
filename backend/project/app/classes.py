@@ -45,33 +45,27 @@ class MySetPasswordMixin(SetPasswordMixin):
         return user
 
 class MyBaseUserCreationForm(MySetPasswordMixin, forms.ModelForm):
-    """
-    A form that creates a user, with no privileges, from the given username and
-    password.
-
-    This is the documented base class for customizing the user creation form.
-    It should be kept mostly unchanged to ensure consistency and compatibility.
-    """
-
     password = MySetPasswordMixin.create_password_field()
-    email = forms.EmailField(required=True)
+    password.widget.attrs.update({"class": "form-control", "id": "reg-password", "name": "password"})
+
+    email = forms.EmailField(
+        required=True,
+        widget=forms.EmailInput(attrs={"class": "form-control", "id": "reg-email", "name": "email"})
+    )
 
     class Meta:
         model = User
-        fields = ("username", "email" , "password")
+        fields = ("username", "email", "password")
         field_classes = {"username": UsernameField}
         widgets = {
             "username": forms.TextInput(attrs={"class": "form-control", "id": "reg-username", "name": "username"}),
-            "email": forms.EmailInput(attrs={"class": "form-control", "id": "reg-email", "name": "email"}),
-            "password": forms.PasswordInput(attrs={"class": "form-control", "id": "reg-password", "name": "password"}),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         if self._meta.model.USERNAME_FIELD in self.fields:
-            self.fields[self._meta.model.USERNAME_FIELD].widget.attrs[
-                "autofocus"
-            ] = True
+            self.fields[self._meta.model.USERNAME_FIELD].widget.attrs["autofocus"] = True
+
 
     def clean(self):
         self.validate_password()
