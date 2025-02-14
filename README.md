@@ -4,7 +4,7 @@
 A web application project vulnerable to XSS attacks, created for educational purposes. Users can attempt to perform the most common XSS and brute-force attacks. The main purpose of the app is to raise awareness about XSS and brute-force attack principles. Additionally, app provides user login and registration functionality. To see the application in action (video) you can use the link at the bottom of the file.
 
 ## Application sections
-Each section in the app is dedicated to a specific type of attack. Sections allow users to conduct attacks and also contain instructions on how to carry them out
+Each section in the app is dedicated to a specific type of attack. Sections allow users to conduct attacks and also contain instructions on how to carry them out.
 
 1. **Reflected XSS**
 2. **Stored XSS**
@@ -29,5 +29,7 @@ Link to the demo video: https://www.dropbox.com/scl/fi/aeuqunxafs9p0f41ecjzd/XSS
 
 Link to the presentation: https://docs.google.com/presentation/d/1t4eAdO7WbdEG1nmoUypSLJ53ITi2OUUPsaMD5yrYEhI/edit#slide=id.p 
 
+## Instruction
 
+Information on how to set up the project (in polish): [instruction](./INSTRUKCJA.md)
 
