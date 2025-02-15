@@ -23,7 +23,7 @@ Each section in the app is dedicated to a specific type of attack. Sections allo
 
 ## Operation overview
 
-Link to the demo video: https://www.dropbox.com/scl/fi/aeuqunxafs9p0f41ecjzd/XSS-vulnerable-app_demo.mkv?rlkey=xw3bj5tsieookht44qctajqlp&st=0lr4b12d&dl=0
+Link to the demo video: https://www.dropbox.com/scl/fi/k2wqwprgzppwvlzo70d32/XSS-vulnerable-app_demo.mp4?rlkey=wxr0ymg72jk8w4dmfff8z82p1&st=9938momo&dl=0
 
 ## Presentation for students
 
